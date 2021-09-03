@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Draggable-Box</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+        }
+
+        article {
+            top: 50px;
+            left: 50px;
+            position: absolute;
+            width: 400px;
+            height: auto;
+            border: 2px solid #000;
+        }
+
+        #header {
+            width: 100%;
+            height: 50px;
+            background-color: #ccc;
+            border-bottom: 2px solid;
+            cursor: move;
+        }
+
+        #main {
+            width: 100%;
+            height: auto;
+            padding: 5px;
+            text-align: justify;
+        }
+
+        h1 {
+            padding-bottom: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <article>
+        <div id="header">
+            <h1>Click and drag to move</h1>
+        </div>
+        <div id="main">
+            <h1>Body</h1>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis quam pariatur aspernatur
+                consequuntur
+                cumque, deserunt alias non ullam illo esse aliquam nihil facere itaque voluptatum ipsa, est laboriosam
+                laudantium perferendis!
+            </p>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis quam pariatur aspernatur
+                consequuntur
+                cumque, deserunt alias non ullam illo esse aliquam nihil facere itaque voluptatum ipsa, est laboriosam
+                laudantium perferendis!
+            </p>
+        </div>
+    </article>
+
+    <script type="text/javascript">
+        const article = document.querySelector('article');
+        const header = document.querySelector('#header');
+
+        header.addEventListener('mousedown', () => {
+            header.addEventListener('mousemove', updatePosition);
+
+            window.addEventListener('mouseup', removeHandler);
+        });
+
+        function updatePosition(e) {
+            article.style.setProperty('left', `${e.x - 200}px`);
+            article.style.setProperty('top', `${e.y - 25}px`);
+        }
+
+        function removeHandler() {
+            header.removeEventListener('mousemove', updatePosition);
+            header.removeEventListener('mouseup', removeHandler);
+        }
+    </script>
+</body>
+
+</html>
